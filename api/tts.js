@@ -16,8 +16,7 @@ if (req.method === "OPTIONS") {
     return res.status(400).json({ error: "Text is required" });
   }
 
-  const VOICE_ID = voice_id || "21m00Tcm4TlvDq8ikWAM";
-
+  const VOICE_ID = voice_id || "EwdSxXcxjKJf4APc6yaQ";
   try {
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}`,
