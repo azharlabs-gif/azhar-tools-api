@@ -35,8 +35,29 @@ if (req.method === "OPTIONS") {
     );
 
     if (!response.ok) {
-      const error = await response.text();
-      return res.status(response.status).send(error);
+
+    const errorText = await response.text();
+
+    if (
+        response.status === 401 ||
+        response.status === 402 ||
+        response.status === 429
+    ) {
+
+        return res.status(429).json({
+
+            error: "QUOTA_EXHAUSTED"
+
+        });
+
+    }
+
+    return res.status(response.status).json({
+
+        error: errorText
+
+    });
+
     }
 
     const audio = await response.arrayBuffer();
