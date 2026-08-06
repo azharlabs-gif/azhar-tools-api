@@ -10,7 +10,7 @@ if (req.method === "OPTIONS") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { text, voice_id } = req.body;
+ const { text, voice_id, user_api_key } = req.body; 
 
   if (!text) {
     return res.status(400).json({ error: "Text is required" });
@@ -23,7 +23,7 @@ if (req.method === "OPTIONS") {
       {
         method: "POST",
         headers: {
-          "xi-api-key": process.env.ELEVENLABS_API_KEY,
+          "xi-api-key": user_api_key || process.env.ELEVENLABS_API_KEY,
           "Content-Type": "application/json",
           "Accept": "audio/mpeg"
         },
